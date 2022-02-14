@@ -1,29 +1,4 @@
-// copy pasted assertEqual function
-const assertEqual = function(actual, expected) {
-  if (actual === expected) {
-    console.log(`✅✅✅Assertion Passed: ${actual} === ${expected}`);
-  } else {
-    console.log(`🔴🔴🔴Assertion Failed: ${actual} !== ${expected}`);
-  }
-};
-
-// copy pasted eqArrays function
-const eqArrays = function(arr1, arr2) {
-
-  // first check if two arrays have the same amount of elements
-  if (arr1.length !== arr2.length) {
-    return false;
-  }
-  // compare two arrays element by element
-  for (let i = 0; i < arr1.length; i++) {
-    if (arr1[i] !== arr2[i  ]) return false;
-  }
-
-  // if both tests above passed, return true
-  return true;
-};
-
-
+const eqArrays = require('./eqArrays');
 
 // Actual function
 const eqObjects = function(object1, object2) {
@@ -54,17 +29,5 @@ const eqObjects = function(object1, object2) {
   return true;
 };
 
-// TEST CODE
-const cd = { c: "1", d: ["2", 3] };
-const dc = { d: ["2", 3], c: "1" };
-
-assertEqual(eqObjects(cd, dc), true);
-
-const cd2 = { c: "1", d: ["2", 3, 4] };
-assertEqual(eqObjects(cd, cd2), false);
-
-assertEqual(eqObjects({ a: { z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }), true); // => true
-assertEqual(eqObjects({ a: { z: 1 }, b: 2 }, { a: { z: 1 }, b: 3 }), false); // => false
-assertEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }), false); // => false
-assertEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: 1, b: 2 }), false); // => false
+module.exports = eqObjects;
 
