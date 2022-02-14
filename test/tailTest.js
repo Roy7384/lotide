@@ -1,22 +1,27 @@
-const assertEqual = require('../assertEqual');
+const assert = require('chai').assert;
 const tail = require('../tail');
 
-// Test code to see if tail function modified original array
-const words = ["Yo Yo", "Lighthouse", "Labs"];
-tail(words); // no need to capture the return value since we are not checking it
-assertEqual(words.length, 3); // original array should still have 3 elements!
+describe('tail.js test', ()=> {
 
-// Test code to see if the tail function works
-// Test Case 1: Check the returned array elements
-const result = tail(["Hello", "Lighthouse", "Labs"]);
-assertEqual(result.length, 2); // ensure we get back two elements
-assertEqual(result[0], "Lighthouse"); // ensure first element is "Lighthouse"
-assertEqual(result[1], "Labs"); // ensure second element is "Labs"
+  it('should not modify original array', ()=>{
+    const words = ["Yo Yo", "Lighthouse", "Labs"];
+    tail(words);
+    assert.strictEqual(words.length, 3); // original array should still have 3 elements!
+  });
 
-// Test Case 2: An array with only one element
-const result2 = tail(["Hello"]);
-assertEqual(result2.length, 0); // ensure we get back an empty array
+  it('should return the array without the head', ()=>{
+    const result = tail(["Hello", "Lighthouse", "Labs"]);
+    assert.deepEqual(result, ["Lighthouse", "Labs"]);
+  });
 
-// Test Case 3: An empty array
-const result3 = tail([]);
-assertEqual(result3.length, 0); // ensure we get back an empty array
+  it('should return an empty array when passed an array with one element', ()=>{
+    const result = tail(["Hello"]);
+    assert.strictEqual(result.length, 0);
+  });
+
+  it('should return an empty array when passed an empty array', ()=>{
+    const result = tail([]);
+    assert.strictEqual(result.length, 0);
+  });
+
+});
